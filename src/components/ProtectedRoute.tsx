@@ -1,0 +1,16 @@
+import {Navigate, Outlet, useLocation} from "react-router";
+import {useAuth} from "@/hooks/useAuth.ts";
+
+const ProtectedRoute = () => {
+
+    const {isAuthenticated} = useAuth();
+    const location = useLocation();
+
+    if (!isAuthenticated) {
+        return <Navigate to="/auth/login" state={{from: location}} replace/>;    //form or from
+    }
+    return <Outlet/>
+
+}
+
+export default ProtectedRoute;
