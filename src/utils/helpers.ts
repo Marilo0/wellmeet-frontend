@@ -1,20 +1,18 @@
 import { getCookie } from "@/utils/cookies";
 
-//Helper function that creates HTTP headers with JWT authorization token for API requests.
-
-
-// Factory function that creates headers object for API requests
+/*
+  Returns HTTP headers for API requests.
+  If a JWT token exists, it adds the Authorization header.
+*/
 export const getAuthHeaders = () => {
-    // Try to get the JWT token from cookies
+    // Read JWT token from cookies (null if not logged in)
     const token = getCookie("access_token");
 
     return {
-        "Content-Type": "application/json",  // Tell server we're sending JSON
-        // Spread operator with conditional: only add Authorization if token exists
-        // This is the "conditional property" pattern
+        // We send JSON data to the backend
+        "Content-Type": "application/json",
+
+        // Add Authorization header ONLY if token exists
         ...(token && { Authorization: `Bearer ${token}` }),
-        // Breakdown:
-        // - (token && {...}) evaluates to object if token exists, false if not
-        // - ...false spreads nothing, ...{Authorization: ...} spreads the property
     };
 };
