@@ -1,26 +1,30 @@
 import type {
     Activity,
     PaginatedResult,
+    ActivityHasJoined,
     ActivityCreateFields,
     ActivityUpdateFields,
     ActivityFilters
 } from "@/schemas/activities.ts"
 import { getAuthHeaders } from "@/utils/helpers";
 
+// Base API URL (set in .env)
 const API_URL = import.meta.env.VITE_API_URL
-// const userId = import.meta.env.VITE_USER_ID
 
-// --------------------------------------------------------------------------GET ACTIVITIES
+
+// ---------------------------------------------------------------------------
 export async function  getActivities(
     pageNumber= 1,
     pageSize = 5,
     filters?: ActivityFilters
 ): Promise<PaginatedResult<Activity>> {
 
+    // Build query parameters for pagination
     const params = new URLSearchParams({
         pageNumber : pageNumber.toString(),
         pageSize : pageSize.toString(),
     })
+    // Add filter parameters only if they exist
     if (filters) {
         Object.entries(filters).forEach(([key, value]) => {
             if (value !== undefined && value !== "") {
@@ -37,14 +41,15 @@ export async function  getActivities(
     return await res.json();
 }
 
-//--------------------------------------------------------------------------------------------------------
-
-export async function getActivity(id: number): Promise<Activity> {         //GET ACTIVITY
+// ---------------------------------------------------------------------------
+export async function getActivity(id: number): Promise<Activity> {
     const res = await fetch(`${API_URL}/activities/${id}`);
     if (!res.ok) throw new Error("Failed to fetch activity");
     return await res.json();
 }
 
+// ---------------------------------------------------------------------------
+// Create - Requires authentication.
 export async function createActivity(data: ActivityCreateFields): Promise<Activity> {
     const res = await fetch(`${API_URL}/activities`, {
         method: "POST",
@@ -55,6 +60,8 @@ export async function createActivity(data: ActivityCreateFields): Promise<Activi
     return await res.json();
 }
 
+// ---------------------------------------------------------------------------
+//  Update - Requires authentication and ownership
 export async function updateActivity(id: number, data: ActivityUpdateFields): Promise<Activity> {
     const res = await fetch(`${API_URL}/activities/${id}`, {
         method: "PUT",
@@ -65,6 +72,8 @@ export async function updateActivity(id: number, data: ActivityUpdateFields): Pr
     return await res.json();
 }
 
+// ---------------------------------------------------------------------------
+// Delete - Requires authentication and ownership.
 export async function deleteActivity(id: number): Promise<void> {
     const res = await fetch(`${API_URL}/activities/${id}`, {
         method: "DELETE",
@@ -74,10 +83,9 @@ export async function deleteActivity(id: number): Promise<void> {
 }
 
 
-//----------------NEW HAS JOINEED
-
-
-export async function getActivityHasJoined(id: number) {
+// ---------------------------------------------------------------------------
+//Fetch activity along with "hasJoined" flag.
+export async function getActivityHasJoined(id: number): Promise<ActivityHasJoined> {
     const res = await fetch(`${API_URL}/activities/${id}/has-joined`, {
         headers: getAuthHeaders(),
     });
@@ -86,7 +94,8 @@ export async function getActivityHasJoined(id: number) {
         throw new Error("Failed to fetch activity (hasJoined)");
     }
 
-    return res.json();
+    return await res.json();
 }
+
 
 
