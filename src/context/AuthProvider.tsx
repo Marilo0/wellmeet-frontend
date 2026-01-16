@@ -4,11 +4,10 @@ import { login } from "@/services/api.auth.ts";
 import { deleteCookie, getCookie, setCookie } from "@/utils/cookies.ts";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "@/context/AuthContext.ts";
-
 /* eslint-disable react-hooks/set-state-in-effect */
 
 
-/*
+/**
  JWT payload structure - STANDARD .NET Identity claim names
 */
 type JwtPayload = {
@@ -19,8 +18,8 @@ type JwtPayload = {
     exp?: number;
 };
 
-/*
-  Checks if a JWT token is expired.
+/**
+  Checks if a JWT is expired.
 */
 function isTokenExpired(token: string) {
     try {
@@ -38,9 +37,7 @@ function isTokenExpired(token: string) {
 }
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    /*
-          If cookie does not exist, accessToken will be null.
-    */
+
     const [accessToken, setAccessToken] = useState<string | null>(
         () => getCookie("access_token") ?? null
     );
@@ -67,7 +64,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         resetUser();
     };
 
-    /*
+    /**
       Runs whenever the access token changes.
       - on app startup
       - after login
@@ -114,7 +111,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setCookie("access_token", res.token, {
             expires: 1,
             sameSite: "Lax",
-            secure: false,
+            secure: import.meta.env.PROD, //true in PROD , false in DEV
             path: "/",
         });
 
@@ -139,7 +136,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 loading,
             }}
         >
-            {/* Prevent rendering until auth check is complete */}
             {loading ? <div className="p-8 text-center">Loading...</div> : children}
         </AuthContext.Provider>
     );
