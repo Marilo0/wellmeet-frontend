@@ -31,14 +31,14 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="pt-16 flex items-center justify-center px-4 bg-gradient-to-b from-orange-100 to-white">
+        <div className="pt-16 flex items-center justify-center px-4">
             {/* Wrapper */}
             <div className="flex w-full max-w-4xl overflow-hidden rounded-2xl border border-orange-100 shadow-sm bg-white">
 
                 {/* Left image */}
                 <div className="hidden md:block md:w-1/2">
                     <img
-                        src="/Log%20In%201.png"
+                        src="/login.png"
                         alt="WellMeet wellness"
                         className="h-full w-full object-cover"
                     />
