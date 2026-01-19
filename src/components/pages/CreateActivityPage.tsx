@@ -50,7 +50,7 @@ const CreateActivityPage = () => {
     };
 
     return (
-        <div className="min-h-full bg-gradient-to-b from-orange-100 to-white">
+        <div className="min-h-full">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
                 <div className="flex items-center justify-between mb-6">
                     <h1 className="text-2xl font-semibold text-gray-900">

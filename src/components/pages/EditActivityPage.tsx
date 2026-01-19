@@ -49,7 +49,7 @@ const EditActivityPage = () => {
             })
             .catch(() => toast.error("Failed to load activity"))
             .finally(() => setLoading(false));
-    }, [id]);
+    }, [id, activityId, navigate]);
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -70,7 +70,7 @@ const EditActivityPage = () => {
             setIsSubmitting(true);
             await updateActivity(activity.id, payload);
             toast.success("Activity updated");
-            navigate("/dashboard"); // ✅ go back to dashboard
+            navigate("/dashboard"); // back to dashboard
         } catch (err) {
             toast.error(err instanceof Error ? err.message : "Update failed");
         } finally {
@@ -83,7 +83,7 @@ const EditActivityPage = () => {
     if (!activity) return <p className="p-8 text-center text-red-500">Activity not found</p>;
 
     return (
-        <div className="min-h-full bg-gradient-to-b from-orange-100 to-white">
+        <div className="min-h-full ">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
                 <div className="flex items-center justify-between mb-6">
                     <h1 className="text-2xl font-semibold text-gray-900">Edit Activity</h1>

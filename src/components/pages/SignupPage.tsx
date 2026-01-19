@@ -39,7 +39,7 @@ export default function SignupPage() {
                     <img
                         src="/Completed.png"
                         alt="WellMeet"
-                        className="absolute inset-0 object-cover h-10px"
+                        className="absolute inset-0 object-cover"
                     />
 
                     <div className="relative p-8">
