@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router";
 import Layout from "@/components/Layout/Layout.tsx";
-import HomePage1 from "@/components/pages/HomePage1.tsx";
+import HomePage from "@/components/pages/HomePage.tsx";
 import ActivitiesPage from "@/components/pages/ActivitiesPage.tsx";
 import ActivityDetailsPage from "@/components/pages/ActivityDetailsPage.tsx";
 // import ScrollToTop from "@/components/Helpers/ScrollToTop.tsx";
@@ -31,7 +31,7 @@ function App() {
                 <Toaster richColors position="top-right" />
                 <Routes>
                     <Route element={<Layout />}>
-                        <Route index element={<HomePage1 />} />
+                        <Route index element={<HomePage />} />
 
                         {/* AUTH */}
                         <Route path="/auth/login" element={<LoginPage />} />
