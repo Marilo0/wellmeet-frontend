@@ -63,6 +63,10 @@ const ActivityDetailsPage = () => {
 
                 <div className="text-sm text-gray-700 space-y-1">
                     <p>
+                        <strong>Location:</strong> {activity.city}{activity.location ? `, ${activity.location}` : ""}
+                    </p>
+
+                    <p>
                         <strong>Date:</strong>{" "}
                         {new Date(activity.startDateTime).toLocaleString()}
                     </p>
