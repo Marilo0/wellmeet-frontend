@@ -27,24 +27,20 @@ export async function  getActivities(
 
     // Add filter parameters only if they exist
     if (filters) {
-        if (filters) {
-            (Object.keys(filters) as (keyof ActivityFilters)[]).forEach((key) => {
-                const value = filters[key];
+        (Object.keys(filters) as (keyof ActivityFilters)[]).forEach((key) => {
+            const value = filters[key];
 
-                if (value === undefined || value === null) return;
+            if (value === undefined || value === null) return;
 
-                if (typeof value === "boolean") {
-                    if (value) params.append(key, "true");
-                    return;
-                }
+            if (typeof value === "boolean") {
+                if (value) params.append(key, "true");
+                return;
+            }
 
-                //  TS knows it's string
-                const v = value.trim();
-                if (v !== "") params.append(key, v);
-            });
-        }
-
-
+            //  TS knows it's string
+            const v = value.trim();
+            if (v !== "") params.append(key, v);
+        });
     }
 
     const res = await fetch(`${API_URL}/activities?${params.toString()}`, {
