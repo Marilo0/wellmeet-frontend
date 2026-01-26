@@ -1,5 +1,6 @@
 import { z } from "zod";
 import  {userReadOnlySchema} from "@/schemas/users.ts";
+import {ACTIVITY_CATEGORIES, type ActivityCategory} from "@/schemas/activityCategories.ts";
 
 
 /**
@@ -12,7 +13,7 @@ export const activitySchema = z.object({
 
     city: z.string(),
     location: z.string(),
-    category: z.string(),
+    category: z.enum(ACTIVITY_CATEGORIES),
 
     startDateTime: z.iso.datetime(),
     endDateTime: z.iso.datetime(),
@@ -58,10 +59,9 @@ export const activityCreateSchema = z.object({
         .min(1, {message: "The Location field is required."})
         .max(255, {message: "Location must not exceed 255 characters."}),
 
-    category: z.string()
-        .trim()
-        .min(1, {message: "The Category field is required."})
-        .max(100, {message: "Category must not exceed 100 characters."}),
+    category: z.enum(ACTIVITY_CATEGORIES, {
+        message: "The Category field is required.",
+    }),
 
     startDateTime: z.iso.datetime(),
     endDateTime: z.iso.datetime(),
@@ -108,7 +108,7 @@ export type PaginatedResult<T> = {
  */
 export type ActivityFilters = {
     title?: string;
-    category?: string;
+    category?: ActivityCategory;
     city?: string;
     location?: string;
     isJoinable?: boolean;
@@ -143,6 +143,7 @@ export type ActivityParticipant = z.infer<typeof activityParticipantSchema>;
 export type ActivityHasJoined = Activity & {
     hasJoined: boolean;
 };
+
 
 
 

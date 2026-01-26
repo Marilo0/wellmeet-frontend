@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {ACTIVITY_CATEGORIES} from "@/schemas/activityCategories.ts";
 
 const EditActivityPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -34,7 +35,7 @@ const EditActivityPage = () => {
             description: "",
             city: "",
             location: "",
-            category: "",
+            category: ACTIVITY_CATEGORIES[0],
             startDateTime: "",
             endDateTime: "",
             maxParticipants: 10,
@@ -56,7 +57,7 @@ const EditActivityPage = () => {
                     description: a.description ?? "",
                     city: a.city ?? "",
                     location: a.location ?? "",
-                    category: a.category ?? "",
+                    category: a.category ?? ACTIVITY_CATEGORIES[0],
                     startDateTime: a.startDateTime,
                     endDateTime: a.endDateTime,
                     maxParticipants: a.maxParticipants ?? 10,
@@ -128,7 +129,17 @@ const EditActivityPage = () => {
 
                     <div className="space-y-2">
                         <Label htmlFor="category">Category</Label>
-                        <Input id="category" {...register("category")} />
+                        <select
+                            id="category"
+                            {...register("category")}
+                            className="border rounded px-3 py-2 w-full"
+                        >
+                            {ACTIVITY_CATEGORIES.map((category) => (
+                                <option key={category} value={category}>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
                         {errors.category && <p className="text-red-600 text-sm">⚠️ {errors.category.message}</p>}
                     </div>
 

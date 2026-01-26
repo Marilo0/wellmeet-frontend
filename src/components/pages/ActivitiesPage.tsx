@@ -5,6 +5,7 @@ import type { Activity, ActivityFilters } from "@/schemas/activities.ts";
 import { Button } from "@/components/ui/button.tsx";
 import ActivityCard from "@/components/activities/ActivityCard";
 import { useNavigate } from "react-router";
+import {ACTIVITY_CATEGORIES, type ActivityCategory} from "@/schemas/activityCategories.ts";
 
 const PAGE_SIZE = 5;
 
@@ -16,7 +17,9 @@ const ActivitiesPage = () => {
     const [page, setPage] = useState(1);
 
     // RHF for filters (no zod, backend-shaped)
-    const { register, control, setValue } = useForm<ActivityFilters>({
+    type ActivityFiltersForm = Omit<ActivityFilters, "category"> & { category: ActivityCategory | "" };
+
+    const { register, control, setValue } = useForm<ActivityFiltersForm>({
         defaultValues: {
             title: "",
             category: "",
@@ -35,7 +38,7 @@ const ActivitiesPage = () => {
     const filters: ActivityFilters = useMemo(
         () => ({
             title: (watched.title ?? "").trim(),
-            category: watched.category ?? "",
+            category: watched.category ? watched.category : undefined,
             city: (watched.city ?? "").trim(),
             upcomingOnly: !!watched.upcomingOnly,
             pastOnly: !!watched.pastOnly,
@@ -99,11 +102,11 @@ const ActivitiesPage = () => {
                         className="border rounded px-3 py-2"
                     >
                         <option value="">All categories</option>
-                        <option value="Workout">Workout</option>
-                        <option value="Yoga">Yoga</option>
-                        <option value="Hiking">Hiking</option>
-                        <option value="Meditation">Meditation</option>
-                        <option value="Other">Other</option>
+                        {ACTIVITY_CATEGORIES.map((category) => (
+                            <option key={category} value={category}>
+                                {category}
+                            </option>
+                        ))}
                     </select>
 
                     {/* City */}
