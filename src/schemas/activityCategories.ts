@@ -3,6 +3,12 @@ export const ACTIVITY_CATEGORIES = [
     "Yoga",
     "Hiking",
     "Meditation",
+    "Arts",
+    "Music",
+    "Education",
+    "Social",
+    "Volunteering",
+    "Gaming",
     "Other",
 ] as const;
 
