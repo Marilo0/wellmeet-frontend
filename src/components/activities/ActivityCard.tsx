@@ -1,6 +1,7 @@
 import type { Activity } from "@/schemas/activities";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import {Pencil, Trash2} from "lucide-react";
 
 type ActivityCardProps = {
     activity: Activity;
@@ -81,19 +82,30 @@ const ActivityCard = ({
 
                 {/* NEW: EDIT/DELETE — ONLY FOR YOUR OWN */}
                 {isMine && onEdit && (
-                    <Button variant="secondary" size="sm" onClick={() => onEdit(activity.id)}>
-                        Edit
+                    <Button
+                        variant="secondary"
+                        size="icon-sm"
+                        onClick={() => onEdit(activity.id)}
+                        className="hover:bg-orange-200"
+                        aria-label="Edit activity"
+                    >
+                        <Pencil />
+                        <span className="sr-only">Edit</span>
                     </Button>
                 )}
 
                 {isMine && onDelete && (
                     <Button
                         variant="destructive"
-                        size="sm"
-                        disabled={deleting}
-                        onClick={() => onDelete(activity.id)}
-                    >
-                        {deleting ? "Deleting..." : "Delete"}
+                    size="icon-sm"
+                    disabled={deleting}
+                    onClick={() => onDelete(activity.id)}
+                        className="hover:bg-red-800"
+                    aria-label="Delete activity"
+                    >   <Trash2 />
+                        <span className="sr-only">
+                            {deleting ? "Deleting" : "Delete"}
+                        </span>
                     </Button>
                 )}
             </div>
