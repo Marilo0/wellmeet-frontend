@@ -90,7 +90,7 @@ const DashboardPage = () => {
 
                         <div className="space-y-1">
                             <h1 className="text-3xl font-semibold text-gray-900">
-ch                                Welcome, {dashboard.user.firstname} {dashboard.user.lastname}
+                               Welcome, {dashboard.user.firstname} {dashboard.user.lastname}
                             </h1>
                             <p className="text-sm text-gray-600">
                                 Here’s what’s happening with your activities.
