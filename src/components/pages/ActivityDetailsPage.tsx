@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { getActivityHasJoined } from "@/services/api.activities";
 import { joinActivity, leaveActivity } from "@/services/api.participations";
 import {useAuth} from "@/hooks/useAuth.ts";
+import {toast} from "sonner";
 
 
 
@@ -96,7 +97,7 @@ const ActivityDetailsPage = () => {
                                     await leaveActivity(activity.id);
                                     setActivity(prev => (prev ? { ...prev, hasJoined: false } : prev));
                                 } catch {
-                                    alert("Failed to leave activity");
+                                    toast.error("Failed to leave activity.");
                                 }
                             }}
                         >
@@ -105,12 +106,13 @@ const ActivityDetailsPage = () => {
                     ) : (
                         <Button
                             disabled={!activity.isJoinable}
+                            className={activity.isJoinable ? "bg-green-600 hover:bg-green-700" : undefined}
                             onClick={async () => {
                                 try {
                                     await joinActivity(activity.id);
                                     setActivity(prev => (prev ? { ...prev, hasJoined: true } : prev));
                                 } catch {
-                                    alert("Failed to join activity");
+                                    toast.error("Failed to leave activity.");
                                 }
                             }}
                         >
