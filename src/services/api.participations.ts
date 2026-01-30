@@ -1,4 +1,4 @@
-import { getAuthHeaders } from "@/utils/helpers";
+import { getAuthHeaders } from "@/utils/authHeaders.ts";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

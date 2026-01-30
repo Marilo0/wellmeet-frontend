@@ -6,7 +6,7 @@ import type {
     ActivityUpdateFields,
     ActivityFilters
 } from "@/schemas/activities.ts"
-import { getAuthHeaders } from "@/utils/helpers";
+import { getAuthHeaders } from "@/utils/authHeaders.ts";
 
 // Base API URL (set in .env)
 const API_URL = import.meta.env.VITE_API_URL
