@@ -60,10 +60,9 @@ const Header = () => {
                             Activities
                         </NavLink>
 
-                        {/*tooo seee that later*/}
                         {userRole === "Admin" && (
-                            <NavLink to="/admin" className={navLinkClass}>
-                                Admin
+                            <NavLink to="/users" className={navLinkClass}>
+                                Users
                             </NavLink>
                         )}
                     </nav>
@@ -137,9 +136,8 @@ const Header = () => {
                                             Activities
                                         </NavLink>
 
-                                        {/*TTTOOOOOOO SEEEE THIS LATEEEEEEER*/}
                                         {userRole === "Admin" && (
-                                            <NavLink to="/admin" onClick={close} className={navLinkClass}>
+                                            <NavLink to="/users" onClick={close} className={navLinkClass}>
                                                 Admin
                                             </NavLink>
                                         )}
