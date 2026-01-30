@@ -90,7 +90,7 @@ const DashboardPage = () => {
 
                         <div className="space-y-1">
                             <h1 className="text-3xl font-semibold text-gray-900">
-                                Welcome, {dashboard.user.firstname} 👋
+ch                                Welcome, {dashboard.user.firstname} {dashboard.user.lastname}
                             </h1>
                             <p className="text-sm text-gray-600">
                                 Here’s what’s happening with your activities.
@@ -102,7 +102,7 @@ const DashboardPage = () => {
                         <Button variant="outline" onClick={() => navigate("/activities")}>
                             Search Activities
                         </Button>
-                        <Button onClick={() => navigate("/activities/new")}>
+                        <Button className="bg-orange-800 hover:bg-red-900" onClick={() => navigate("/activities/new")}>
                             Create Activity
                         </Button>
                     </div>
