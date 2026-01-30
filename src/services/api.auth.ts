@@ -25,10 +25,11 @@ export async function login(
           }),
       });
     if (!res.ok) {
-        let detail = "Login failed";  //default error
+        let detail = "Login failed";  // default message
         try {
             const data = await res.json();
-
+            //backend currently returns code/message only
+            // in case backend adopts details later
             if (typeof data?.detail === "string") detail = data.detail;
             if (typeof data?.title === "string") detail = data.title;
             if (typeof data === "string") detail = data;  //change the default with api error if exists
@@ -55,20 +56,17 @@ export async function register(userData: UserRegisterFields): Promise<UserReadOn
     });
 
     if (!res.ok) {
-        let detail = "Registration failed";
+
+
+        let detail = "Registration failed"; // default message
         try {
             const data = await res.json();
-
-            // Your backend seems to throw exceptions with "detail"/"title"
+            //backend currently returns code/message only
+            // in case backend adopts details later
             if (typeof data?.detail === "string") detail = data.detail;
             else if (typeof data?.title === "string") detail = data.title;
             else if (typeof data === "string") detail = data;
 
-            // If later you return { errors: { field: [...] } } this will support it too:
-            else if (data?.errors) {
-                const errors = Object.values(data.errors).flat();
-                detail = (errors as string[]).join(", ");
-            }
         } catch {
             // ignore parse errors
         }
