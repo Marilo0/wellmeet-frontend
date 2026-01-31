@@ -72,15 +72,15 @@ const ActivityCard = ({
                     Details
                 </Button>
 
-                {/* JOIN BUTTON — ONLY WHEN ALLOWED */  }
-                {/*tbd later when user-aware (hasJoined) dto is used*/}
+
+                {/* JOIN BUTTON when user-aware (hasJoined) dto is used*/}
                 {/*{!isMine && !isClosed && onJoin && (*/}
                 {/*    <Button size="sm" onClick={() => onJoin(activity.id)}>*/}
                 {/*        Join*/}
                 {/*    </Button>*/}
                 {/*)}*/}
 
-                {/* NEW: EDIT/DELETE — ONLY FOR YOUR OWN */}
+                {/* EDIT/DELETE */}
                 {isMine && onEdit && (
                     <Button
                         variant="secondary"

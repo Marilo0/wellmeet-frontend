@@ -175,7 +175,7 @@ const ActivitiesPage = () => {
                 ))}
             </div>
 
-            {/* Pagination (single source of truth: page) */}
+            {/* Pagination */}
             <div className="flex justify-center items-center gap-4 mt-6">
                 <Button
                     variant="outline"
